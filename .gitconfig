@@ -1,0 +1,38 @@
+[user]
+    name = Marco Magdy
+[color]
+    ui = auto
+[color "branch"]
+    current   = bold white green
+    local     = bold yellow
+    remote    = bold magenta
+    upstream  = bold cyan
+[color "status"]
+  # staged changes
+    added     = bold green
+    updated   = bold white green
+  # un-staged changes
+    changed   = bold yellow
+    untracked = bold cyan
+    nobranch  = bold red white
+[core]
+    pager = less -FMRiX
+    editor = mvim
+[push]
+    default = simple
+[alias]
+    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+    ls  = log --graph --pretty=format:'%C(yellow)%h%C(bold white red)%d%Creset %s %C(bold green)%cr %Creset%C(white)%an' --abbrev-commit --date=relative
+    co  = checkout
+    br  = branch
+    ss  = status -s
+[diff]
+    tool = bc3
+[merge]
+    tool = bc3
+[mergetool]
+    bc3 = trustExitCode
+[github]
+    user = marcomagdy
+[include]
+    path = ~/.local.gitconfig
