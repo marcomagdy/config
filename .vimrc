@@ -77,9 +77,14 @@ Plugin 'vim-scripts/tComment'
 Plugin 'tpope/vim-surround'
 Plugin 'thinca/vim-quickrun'
 Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:airline#extensions#tabline#enabled = 1
+
 
 set smartindent
 set tabstop=4
@@ -124,7 +129,5 @@ set backspace=indent,eol,start  " make that backspace key work the way it should
 set showmode                    " show the current mode
 
 
-" Show EOL type and last modified timestamp, right after the filename
-set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
-hi CursorLine ctermbg=yellow ctermfg=black
+hi CursorLine ctermbg=27 ctermfg=white
