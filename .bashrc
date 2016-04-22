@@ -42,7 +42,7 @@ $ '
 
 if [[ "$(uname)" == Darwin ]]; then
 
-    alias ls=ls -GC
+    alias ls='ls -GC'
     export PATH="/usr/local/Cellar/git/2.7.3/bin:$PATH"
 fi
 
