@@ -17,7 +17,7 @@
     nobranch  = bold red white
 [core]
     pager = less -FMRiX
-    editor = mvim
+    editor = vim
 [push]
     default = simple
 [alias]
