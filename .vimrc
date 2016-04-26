@@ -110,10 +110,28 @@ set noswf " no swap file
 
 set go-=T "hide toolbar and the gui tabs
 set go-=e "Use non-gui tabs
-"set guifont=Ubuntu\ Mono:h14
 set guifont=Consolas:h14
+"----------------COLORS------------------------------
 color desert
 syn on
+set background=dark
+
+highlight clear SignColumn
+highlight VertSplit    ctermbg=236
+highlight ColorColumn  ctermbg=237
+highlight LineNr       ctermbg=236 ctermfg=240
+highlight CursorLineNr ctermbg=236 ctermfg=240
+highlight CursorLine   ctermbg=15  ctermfg=0
+highlight StatusLineNC ctermbg=238 ctermfg=0
+highlight StatusLine   ctermbg=240 ctermfg=12
+highlight IncSearch    ctermbg=3   ctermfg=1
+highlight Search       ctermbg=1   ctermfg=3
+highlight Visual       ctermbg=3   ctermfg=0
+highlight Pmenu        ctermbg=240 ctermfg=12
+highlight PmenuSel     ctermbg=3   ctermfg=1
+highlight SpellBad     ctermbg=0   ctermfg=1
+
+"---------------------------------------------
 
 
 " Below are the settings from Git installation
@@ -125,9 +143,6 @@ set vb                          " turn on the "visual bell" - which is much quie
 set ruler                       " show the cursor position all the time
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
 set backspace=indent,eol,start  " make that backspace key work the way it should
-"set background=dark             " Use colours that work well on a dark background (Console is usually black)
 set showmode                    " show the current mode
 
 
-
-hi CursorLine ctermbg=27 ctermfg=white
