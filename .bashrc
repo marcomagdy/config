@@ -23,7 +23,7 @@ bind "set show-all-if-ambiguous on"
 #try to find git-prompt.sh if __git_ps1 was not automatically provided.
 if ! type -t __git_ps1 > /dev/null 2>&1 ; then
     #cygwin (non-msysgit): try to find git-prompt.sh
-    gitprompt_home="~/.git-prompt.sh" 
+    gitprompt_home="$HOME/.git-prompt.sh" 
     [ -f "$gitprompt_home" ] && source "$gitprompt_home"
 fi
 

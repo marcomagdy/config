@@ -35,4 +35,4 @@
 [github]
     user = marcomagdy
 [include]
-    path = ~/.local.gitconfig
+    path = ~/.gitconfig.local

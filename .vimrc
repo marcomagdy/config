@@ -1,5 +1,6 @@
 "leader is '\' by default
 map <leader>cd :cd%:p:h
+set clipboard="+
 
 nnoremap <leader><leader> :NERDTreeFind<CR>
 nnoremap <F4> :NERDTreeClose<CR>
