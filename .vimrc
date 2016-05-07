@@ -13,8 +13,8 @@ noremap 1 ^
 " \l       : list buffers
 " \b \f \g : go back/forward/last-used
 " \1 \2 \3 : go to buffer 1/2/3 etc
-nnoremap <C-Tab>   :bn<CR>
-nnoremap <C-S-Tab> :bp<CR>
+nnoremap <C-l>   :bn<CR>
+nnoremap <C-h> :bp<CR>
 nnoremap <Leader>l :ls<CR>
 "close current buffer
 nnoremap <Leader>d :bdelete<CR>
