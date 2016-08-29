@@ -77,6 +77,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/tComment'
 Plugin 'tpope/vim-surround'
 Plugin 'thinca/vim-quickrun'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -85,6 +86,7 @@ filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 
 set smartindent
@@ -145,5 +147,6 @@ set ruler                       " show the cursor position all the time
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set showmode                    " show the current mode
+set mouse=n
 
 
