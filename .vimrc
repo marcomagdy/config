@@ -1,6 +1,5 @@
 "leader is '\' by default
 map <leader>cd :cd%:p:h
-set clipboard="+
 
 nnoremap <leader><leader> :NERDTreeFind<CR>
 nnoremap <F4> :NERDTreeClose<CR>
@@ -129,7 +128,7 @@ highlight StatusLineNC ctermbg=238 ctermfg=0
 highlight StatusLine   ctermbg=240 ctermfg=12
 highlight IncSearch    ctermbg=3   ctermfg=1
 highlight Search       ctermbg=1   ctermfg=3
-highlight Visual       ctermbg=15  ctermfg=163
+highlight Visual       ctermbg=15   ctermfg=163
 highlight Pmenu        ctermbg=240 ctermfg=12
 highlight PmenuSel     ctermbg=3   ctermfg=1
 highlight SpellBad     ctermbg=0   ctermfg=1
@@ -147,6 +146,10 @@ set ruler                       " show the cursor position all the time
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set showmode                    " show the current mode
-set mouse=n
+set mouse=a
+" allow window resizing with the mouse inside tmux
+if &term =~ '^screen'
+    set ttymouse=xterm2
+endif
 
 
