@@ -17,6 +17,7 @@ nnoremap <C-h> :bp<CR>
 nnoremap <Leader>l :ls<CR>
 "close current buffer
 nnoremap <Leader>d :bdelete<CR>
+nnoremap <Leader>v :call VsplitBuffer()<CR>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
 " nnoremap <Leader>g :e#<CR>
@@ -61,6 +62,13 @@ endfunction
 
 command! -nargs=+ GrepBufs call GrepBuffers(<q-args>)
 
+function! VsplitBuffer()
+    call inputsave()
+    let buf_num = input('Which buffer?')
+    call inputrestore()
+    exec 'vsp | b '.buf_num
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 set nocompatible                " vi compatible is LAME
@@ -86,6 +94,7 @@ filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dark'
 
