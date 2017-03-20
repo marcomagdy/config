@@ -1,7 +1,12 @@
-"leader is '\' by default
+let mapleader="," " leader is a comma
 map <leader>cd :cd%:p:h
 
+" relood the current vimrc file
+nnoremap <leader>sv :source $MYVIMRC<CR> 
+nnoremap <leader>ev :vsp $MYVIMRC<CR> 
 nnoremap <leader><leader> :NERDTreeFind<CR>
+nnoremap <leader><space> :noh<CR>
+nnoremap <leader>a :Ack<space>
 nnoremap <F4> :NERDTreeClose<CR>
 inoremap jj <ESC>
 inoremap <ESC> <Nop>
@@ -89,6 +94,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'morhetz/gruvbox'
+Plugin 'mileszs/ack.vim'
 call vundle#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -97,6 +103,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dark'
+
+
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep' " use ag if it's installed
+endif
 
 
 set smartindent
@@ -158,6 +169,7 @@ set ruler                       " show the cursor position all the time
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set showmode                    " show the current mode
+set colorcolumn=120             " display a line length marker
 set mouse=a
 " allow window resizing with the mouse inside tmux
 if &term =~ '^screen'
