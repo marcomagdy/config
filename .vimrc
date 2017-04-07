@@ -4,7 +4,7 @@ map <leader>cd :cd%:p:h
 " relood the current vimrc file
 nnoremap <leader>sv :source $MYVIMRC<CR> 
 nnoremap <leader>ev :vsp $MYVIMRC<CR> 
-nnoremap <leader><leader> :NERDTreeFind<CR>
+nnoremap <leader><leader> :NERDTreeToggle<CR>
 nnoremap <leader><space> :noh<CR>
 nnoremap <leader>a :Ack<space>
 nnoremap <F4> :NERDTreeClose<CR>
@@ -22,6 +22,8 @@ nnoremap <C-h> :bp<CR>
 nnoremap <Leader>l :ls<CR>
 "close current buffer
 nnoremap <Leader>d :bdelete<CR>
+"force close current buffer, even if there're unsaved changes
+nnoremap <Leader>fd :bdelete!<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
@@ -110,24 +112,6 @@ if executable('ag')
 endif
 
 
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set number
-set autoread
-
-set incsearch
-set hlsearch
-set smartcase
-set ignorecase
-" highlight the cursor line on the active buffer only
-augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-augroup END
-
 
 "set enc=utf-8 not sure if this is needed; see fileencoding=utf-8
 set noswf " no swap file
@@ -159,11 +143,20 @@ highlight Visual       ctermbg=15   ctermfg=163
 "---------------------------------------------
 
 
-" Below are the settings from Git installation
-" Setting some decent VIM settings for programming
-
+set cursorline
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set number
+set autoread
+set incsearch
+set hlsearch
+set smartcase
+set ignorecase
+set lazyredraw
 set ai                          " set auto-indenting on for programming
-set showmatch                   " automatically show matching brackets. works like it does in bbedit.
+set showmatch                   " automatically show matching brackets. 
 set vb                          " turn on the "visual bell" - which is much quieter than the "audio blink"
 set ruler                       " show the cursor position all the time
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
