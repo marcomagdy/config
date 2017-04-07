@@ -96,6 +96,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'morhetz/gruvbox'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 call vundle#end()
 filetype plugin indent on "required
@@ -106,6 +107,10 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dark'
 
+let g:ctrlp_max_depth = 80
+let g:ctrlp_max_files = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""' " use ag for searching
+let g:ctrlp_working_path = 0 " ctrlp respect changing vim's working directory
 
 if executable('ag')
     let g:ackprg = 'ag --vimgrep' " use ag if it's installed
