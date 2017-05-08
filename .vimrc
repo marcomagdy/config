@@ -4,7 +4,7 @@ map <leader>cd :cd%:p:h
 " relood the current vimrc file
 nnoremap <leader>sv :source $MYVIMRC<CR> 
 nnoremap <leader>ev :vsp $MYVIMRC<CR> 
-nnoremap <leader><leader> :NERDTreeToggle<CR>
+nnoremap <leader><leader> :call ToggleNerdTree()<CR>
 nnoremap <leader><space> :noh<CR>
 nnoremap <leader>a :Ack<space>
 nnoremap <F4> :NERDTreeClose<CR>
@@ -47,6 +47,20 @@ endfun
 
 fun! IsUnix()
     return has('unix')
+endfun
+
+"check if NERDTree buffer is open in the current tab
+fun! IsNerdTreeOpen()
+    return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+endfun
+
+" Toggles NERDTree, but uses NERDTreeFind to navigate to the current file
+fun! ToggleNerdTree()
+    if IsNerdTreeOpen()
+        execute ':NERDTreeClose'
+    else
+        execute ':NERDTreeFind'
+    endif
 endfun
 
 ":GrepBufs <input>
