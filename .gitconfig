@@ -18,6 +18,7 @@
 [core]
     pager = less -FMRiX
     editor = vim
+    ignorecase = false
 [push]
     default = simple
 [alias]
