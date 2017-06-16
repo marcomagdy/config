@@ -4,7 +4,7 @@ map <leader>cd :cd%:p:h
 " relood the current vimrc file
 nnoremap <leader>sv :source $MYVIMRC<CR> 
 nnoremap <leader>ev :vsp $MYVIMRC<CR> 
-nnoremap <leader><leader> :call ToggleNerdTree()<CR>
+nnoremap <leader><leader> :call SmartToggleNERDTree()<CR>
 nnoremap <leader><space> :noh<CR>
 nnoremap <leader>a :Ack<space>
 nnoremap <F4> :NERDTreeClose<CR>
@@ -55,11 +55,11 @@ fun! IsNerdTreeOpen()
 endfun
 
 " Toggles NERDTree, but uses NERDTreeFind to navigate to the current file
-fun! ToggleNerdTree()
+fun! SmartToggleNERDTree()
     if IsNerdTreeOpen()
-        execute ':NERDTreeClose'
+        NERDTreeClose
     else
-        execute ':NERDTreeFind'
+        NERDTreeFind
     endif
 endfun
 
