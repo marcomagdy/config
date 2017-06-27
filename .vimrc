@@ -164,6 +164,7 @@ highlight Visual       ctermbg=15   ctermfg=163
 
 set cursorline
 set smartindent
+set cinoptions=g0 " do not indent C++ scope declarations
 set tabstop=4
 set shiftwidth=4
 set expandtab
