@@ -124,7 +124,7 @@ let g:airline_theme = 'dark'
 
 let g:ctrlp_max_depth = 80
 let g:ctrlp_max_files = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""' " use ag for searching
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore ".git"' " use ag for searching
 let g:ctrlp_working_path = 0 " ctrlp respect changing vim's working directory
 
 if executable('ag')
