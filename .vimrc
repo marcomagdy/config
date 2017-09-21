@@ -162,7 +162,11 @@ highlight Visual       ctermbg=15   ctermfg=163
 
 "---------------------------------------------
 
-
+if !&scrolloff
+    set scrolloff=1 " show at least 1 line above/below cursor
+endif
+set listchars=tab:>\ ,trail:~,extends:>,precedes:<,nbsp:+
+set list
 set cursorline
 set smartindent
 set cinoptions=g0 " do not indent C++ scope declarations
