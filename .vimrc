@@ -25,14 +25,6 @@ nnoremap <Leader>d :bdelete<CR>
 "force close current buffer, even if there're unsaved changes
 nnoremap <Leader>fd :bdelete!<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
-" nnoremap <Leader>b :bp<CR>
-" nnoremap <Leader>f :bn<CR>
-" nnoremap <Leader>g :e#<CR>
-" nnoremap <Leader>1 :1b<CR>
-" nnoremap <Leader>2 :2b<CR>
-" nnoremap <Leader>3 :3b<CR>
-" nnoremap <Leader>4 :4b<CR>
-" nnoremap <Leader>5 :5b<CR>
 
 map <S-W> <Plug>CamelCaseMotion_w
 map <S-B> <Plug>CamelCaseMotion_b
@@ -113,6 +105,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'PeterRincker/vim-argumentative'
 call vundle#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
