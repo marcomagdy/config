@@ -186,5 +186,11 @@ set mouse=a
 if &term =~ '^screen'
     set ttymouse=xterm2
 endif
+" why doesn't my mouse work past the 220th column?
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 
