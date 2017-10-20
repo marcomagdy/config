@@ -6,8 +6,9 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>ev :vsp $MYVIMRC<CR> 
 nnoremap <leader><leader> :call SmartToggleNERDTree()<CR>
 nnoremap <leader><space> :noh<CR>
-nnoremap <leader>a :Ack<space>
-nnoremap <F4> :NERDTreeClose<CR>
+nnoremap <leader>a :Ack!<space>
+nnoremap <C-p> :Files<CR>
+nnoremap <C-t> :Tags<CR>
 inoremap jj <ESC>
 inoremap <ESC> <Nop>
 noremap 0 $
@@ -17,9 +18,9 @@ noremap 1 ^
 " \l       : list buffers
 " \b \f \g : go back/forward/last-used
 " \1 \2 \3 : go to buffer 1/2/3 etc
-nnoremap <C-l>   :bn<CR>
+nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>
-nnoremap <Leader>l :ls<CR>
+nnoremap <C-j> :e#<CR>
 "close current buffer
 nnoremap <Leader>d :bdelete<CR>
 "force close current buffer, even if there're unsaved changes
@@ -86,6 +87,7 @@ endfunction
 " Vundle
 set nocompatible                " vi compatible is LAME
 filetype off
+set rtp+=/usr/local/opt/fzf
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 "Let vundle manage Vundle
@@ -102,10 +104,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'morhetz/gruvbox'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'PeterRincker/vim-argumentative'
+Plugin 'tommcdo/vim-lion'
+Plugin 'junegunn/fzf.vim'
 call vundle#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -116,11 +119,6 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dark'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-
-let g:ctrlp_max_depth = 80
-let g:ctrlp_max_files = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore ".git"' " use ag for searching
-let g:ctrlp_working_path = 0 " ctrlp respect changing vim's working directory
 
 if executable('ag')
     let g:ackprg = 'ag --vimgrep' " use ag if it's installed
