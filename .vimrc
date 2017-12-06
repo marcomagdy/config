@@ -8,7 +8,7 @@ nnoremap <leader><leader> :call SmartToggleNERDTree()<CR>
 nnoremap <leader><space> :noh<CR>
 nnoremap <leader>a :Ack!<space>
 nnoremap <C-p> :Files<CR>
-nnoremap <C-t> :Tags<CR>
+nnoremap <C-i> :Tags<CR>
 inoremap jj <ESC>
 inoremap <ESC> <Nop>
 noremap 0 $
@@ -26,6 +26,14 @@ nnoremap <Leader>d :bdelete<CR>
 "force close current buffer, even if there're unsaved changes
 nnoremap <Leader>fd :bdelete!<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
+" nnoremap <Leader>b :bp<CR>
+" nnoremap <Leader>f :bn<CR>
+" nnoremap <Leader>g :e#<CR>
+" nnoremap <Leader>1 :1b<CR>
+" nnoremap <Leader>2 :2b<CR>
+" nnoremap <Leader>3 :3b<CR>
+" nnoremap <Leader>4 :4b<CR>
+" nnoremap <Leader>5 :5b<CR>
 
 map <S-W> <Plug>CamelCaseMotion_w
 map <S-B> <Plug>CamelCaseMotion_b
@@ -88,28 +96,24 @@ endfunction
 set nocompatible                " vi compatible is LAME
 filetype off
 set rtp+=/usr/local/opt/fzf
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"Let vundle manage Vundle
-"required
-Plugin 'VundleVim/Vundle.vim'
-"My bundles go here
-Plugin 'bkad/CamelCaseMotion'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/tComment'
-Plugin 'tpope/vim-surround'
-Plugin 'thinca/vim-quickrun'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'morhetz/gruvbox'
-Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'PeterRincker/vim-argumentative'
-Plugin 'tommcdo/vim-lion'
-Plugin 'junegunn/fzf.vim'
-call vundle#end()
+call plug#begin('~/.vim/plugged')
+Plug 'bkad/CamelCaseMotion'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-surround'
+Plug 'thinca/vim-quickrun'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'PeterRincker/vim-argumentative'
+Plug 'tommcdo/vim-lion'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/gv.vim'
+call plug#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
