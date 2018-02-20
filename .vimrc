@@ -9,6 +9,7 @@ nnoremap <leader><space> :noh<CR>
 nnoremap <leader>a :Ack!<space>
 nnoremap <C-p> :Files<CR>
 nnoremap <C-i> :Tags<CR>
+nnoremap <C-b> :Buffers<CR>
 inoremap jj <ESC>
 inoremap <ESC> <Nop>
 noremap 0 $
@@ -162,6 +163,7 @@ highlight Visual       ctermbg=15   ctermfg=163
 if !&scrolloff
     set scrolloff=1 " show at least 1 line above/below cursor
 endif
+set pastetoggle=<leader>p
 set listchars=tab:>\ ,trail:~,extends:>,precedes:<,nbsp:+
 set list
 set cursorline
