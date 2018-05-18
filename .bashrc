@@ -3,6 +3,7 @@ set -o vi
 
 #set vim as default editor
 export EDITOR=vim
+export GPG_TTY=$(tty)
 
 # HIST* are bash-only variables, not environmental variables, so do not 'export'
 # ignoredups only ignores _consecutive_ duplicates.
