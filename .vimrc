@@ -2,16 +2,16 @@ let mapleader="," " leader is a comma
 map <leader>cd :cd%:p:h
 
 " relood the current vimrc file
-nnoremap <leader>sv :source $MYVIMRC<CR> 
-nnoremap <leader>ev :vsp $MYVIMRC<CR> 
+nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader><leader> :call SmartToggleNERDTree()<CR>
 nnoremap <leader><space> :noh<CR>
 nnoremap <leader>a :Ack!<space>
-nnoremap <C-p> :Files<CR>
-nnoremap <C-i> :Tags<CR>
-nnoremap <C-b> :Buffers<CR>
+nnoremap <leader>q :Files<CR>
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>g :BLines<CR>
 inoremap jj <ESC>
-inoremap <ESC> <Nop>
 noremap 0 $
 noremap 1 ^
 " Mappings to access buffers (don't use "\p" because a
@@ -129,8 +129,6 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep' " use ag if it's installed
 endif
 
-
-
 "set enc=utf-8 not sure if this is needed; see fileencoding=utf-8
 set noswf " no swap file
 
@@ -138,10 +136,10 @@ set go-=T "hide toolbar and the gui tabs
 set go-=e "Use non-gui tabs
 set guifont=Consolas:h14
 "----------------COLORS------------------------------
-let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_dark='medium'
 color gruvbox
 syn on
-set background=dark
+set background=dark "useful in gui version
 
 " highlight clear SignColumn
 " highlight VertSplit    ctermbg=236
@@ -163,7 +161,6 @@ highlight Visual       ctermbg=15   ctermfg=163
 if !&scrolloff
     set scrolloff=1 " show at least 1 line above/below cursor
 endif
-set pastetoggle=<leader>p
 set listchars=tab:>\ ,trail:~,extends:>,precedes:<,nbsp:+
 set list
 set cursorline
