@@ -107,13 +107,16 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
+Plug 'marcomagdy/gruvbox'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'tommcdo/vim-lion'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'tpope/vim-repeat'
+Plug 'justinmk/vim-sneak'
 call plug#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,6 +127,9 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dark'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+let g:sneak#s_next = 1
+let g:sneak#f_reset = 1
+let g:sneak#label = 1
 
 if executable('ag')
     let g:ackprg = 'ag --vimgrep' " use ag if it's installed
