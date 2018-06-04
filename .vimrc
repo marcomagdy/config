@@ -143,6 +143,7 @@ set go-=e "Use non-gui tabs
 set guifont=Consolas:h14
 "----------------COLORS------------------------------
 let g:gruvbox_contrast_dark='medium'
+let c_space_errors=1
 color gruvbox
 syn on
 set background=dark "useful in gui version
@@ -190,6 +191,7 @@ set laststatus=2                " make the last line where the status is two lin
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set showmode                    " show the current mode
 set colorcolumn=120             " display a line length marker
+set spell
 set mouse=a
 " allow window resizing with the mouse inside tmux
 if &term =~ '^screen'
