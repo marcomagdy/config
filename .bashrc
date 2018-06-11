@@ -7,16 +7,22 @@ export GPG_TTY=$(tty)
 
 # HIST* are bash-only variables, not environmental variables, so do not 'export'
 # ignoredups only ignores _consecutive_ duplicates.
-HISTCONTROL=erasedups:ignoreboth
-HISTSIZE=20000
-HISTFILESIZE=20000
-HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd'
-HISTTIMEFORMAT='%F %T '
+export HISTCONTROL=erasedups:ignoreboth
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTSIZE=
+export HISTFILESIZE=
+export HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd'
+export HISTTIMEFORMAT="[%F %T]"
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
 # append to the history file, don't overwrite it
 shopt -s histappend
-PROMPT_COMMAND='history -a' # append history file after each command
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND" # append history file after each command
+
 # truncate long paths to ".../foo/bar/baz"
-PROMPT_DIRTRIM=4
+export PROMPT_DIRTRIM=4
 
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
@@ -25,7 +31,7 @@ bind "set show-all-if-ambiguous on"
 if ! type -t __git_ps1 > /dev/null 2>&1 ; then
     #cygwin (non-msysgit): try to find git-prompt.sh
     gitprompt_home="$HOME/.git-prompt.sh" 
-    [ -f "$gitprompt_home" ] && source "$gitprompt_home"
+    [ -e "$gitprompt_home" ] && source "$gitprompt_home"
 fi
 
 PS1='\[\033[0;32m\]\u@\h \[\033[33m\]\w\[\033[0m\]'
@@ -44,8 +50,9 @@ $ '
 if [[ "$(uname)" == Darwin ]]; then
 
     alias ls='ls -GC'
-    export PATH="/usr/local/Cellar/git/2.7.3/bin:$PATH"
+    export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/Cellar/git/2.7.3/bin:$PATH"
 fi
 
 
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
