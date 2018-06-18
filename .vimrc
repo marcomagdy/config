@@ -3,17 +3,22 @@ map <leader>cd :cd%:p:h
 
 " relood the current vimrc file
 nnoremap <leader>sv :source $MYVIMRC<CR>
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>cv :vsp $MYVIMRC<CR>
+
 nnoremap <leader><leader> :call SmartToggleNERDTree()<CR>
 nnoremap <leader><space> :noh<CR>
-nnoremap <leader>a :Ack!<space>
-nnoremap <leader>q :Files<CR>
+" <leader>f is more appropriate but adds a delay to discern <leader>f from <leader>fd
+" e is mnemonic for explore
+nnoremap <leader>e :Files<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>g :BLines<CR>
+nnoremap <leader>m :make<CR><CR>
 inoremap jj <ESC>
 noremap 0 $
-noremap 1 ^
+
+" when stuck in the last preview-window, change it to a normal window
+nnoremap <leader>x :new %<CR><C-o>:pc<CR>
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
 " \l       : list buffers
@@ -108,7 +113,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'marcomagdy/gruvbox'
-Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'tommcdo/vim-lion'
@@ -131,8 +135,16 @@ let g:sneak#s_next = 1
 let g:sneak#f_reset = 1
 let g:sneak#label = 1
 
+" use silver searcher (ag) as default grep program
 if executable('ag')
-    let g:ackprg = 'ag --vimgrep' " use ag if it's installed
+    set grepprg=ag\ --vimgrep
+endif
+
+" use ninja instead of make. Switch to build dir first
+if executable('ninja')
+    set makeprg=ninja\ -C\ build
+elseif executable('make')
+    set makeprg=make\ -C\ build
 endif
 
 "set enc=utf-8 not sure if this is needed; see fileencoding=utf-8
@@ -194,13 +206,16 @@ set colorcolumn=120             " display a line length marker
 set spell
 set mouse=a
 " allow window resizing with the mouse inside tmux
-if &term =~ '^screen'
-    set ttymouse=xterm2
-endif
+" if !has('nvim') " not available in nvim
+"     if &term =~ '^screen'
+"         set ttymouse=xterm2
+"     endif
+" endif
+
 " why doesn't my mouse work past the 220th column?
 if has("mouse_sgr")
     set ttymouse=sgr
-else
+elseif !has('nvim')
     set ttymouse=xterm2
 end
 
