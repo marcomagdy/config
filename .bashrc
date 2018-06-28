@@ -49,10 +49,11 @@ $ '
 
 if [[ "$(uname)" == Darwin ]]; then
 
-    alias ls='ls -GC'
-    export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/Cellar/git/2.7.3/bin:$PATH"
+    alias ls='ls -ahlGC'
 fi
 
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+# from https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+[ -f ~/git-completion.bash ] && source ~/git-completion.bash
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
