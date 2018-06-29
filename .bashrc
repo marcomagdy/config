@@ -34,7 +34,8 @@ if ! type -t __git_ps1 > /dev/null 2>&1 ; then
     [ -e "$gitprompt_home" ] && source "$gitprompt_home"
 fi
 
-PS1='\[\033[0;32m\]\u@\h \[\033[33m\]\w\[\033[0m\]'
+PS1='\[\033[0;32m\]\u@\h [\t] \[\033[33m\]\w\[\033[0m\]'
+
 
 # set git prompt iff function exists.
 if type -t __git_ps1 &> /dev/null ; then
