@@ -205,12 +205,7 @@ set showmode                    " show the current mode
 set colorcolumn=120             " display a line length marker
 set spell
 set mouse=a
-" allow window resizing with the mouse inside tmux
-" if !has('nvim') " not available in nvim
-"     if &term =~ '^screen'
-"         set ttymouse=xterm2
-"     endif
-" endif
+set autowrite
 
 " why doesn't my mouse work past the 220th column?
 if has("mouse_sgr")
