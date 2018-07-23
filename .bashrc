@@ -3,6 +3,9 @@ set -o vi
 
 #set vim as default editor
 export EDITOR=vim
+# fzf doesn't have its own ignore file, it relies on the input of 'find', however, ripgrep honors ~/.ignore file, 
+# so use that instead :/
+export FZF_DEFAULT_COMMAND="rg --files"
 export GPG_TTY=$(tty)
 
 # HIST* are bash-only variables, not environmental variables, so do not 'export'

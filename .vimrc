@@ -1,5 +1,4 @@
 let mapleader="," " leader is a comma
-map <leader>cd :cd%:p:h
 
 " relood the current vimrc file
 nnoremap <leader>sv :source $MYVIMRC<CR>
@@ -117,7 +116,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'tommcdo/vim-lion'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/gv.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-sneak'
@@ -135,9 +133,9 @@ let g:sneak#s_next = 1
 let g:sneak#f_reset = 1
 let g:sneak#label = 1
 
-" use silver searcher (ag) as default grep program
-if executable('ag')
-    set grepprg=ag\ --vimgrep
+" use ripgrep (rg) as default grep program
+if executable('rg')
+    set grepprg=rg\ -S\ --vimgrep
 endif
 
 " use ninja instead of make. Switch to build dir first
