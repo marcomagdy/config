@@ -206,6 +206,7 @@ set colorcolumn=120             " display a line length marker
 set spell
 set mouse=a
 set autowrite
+set undofile
 
 " why doesn't my mouse work past the 220th column?
 if has("mouse_sgr")
