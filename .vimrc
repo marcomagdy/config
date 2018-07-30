@@ -145,8 +145,6 @@ elseif executable('make')
     set makeprg=make\ -C\ build
 endif
 
-"set enc=utf-8 not sure if this is needed; see fileencoding=utf-8
-set noswf " no swap file
 
 set go-=T "hide toolbar and the gui tabs
 set go-=e "Use non-gui tabs
@@ -178,6 +176,8 @@ highlight Visual       ctermbg=15   ctermfg=163
 if !&scrolloff
     set scrolloff=1 " show at least 1 line above/below cursor
 endif
+set enc=utf-8
+set noswf " no swap file
 set listchars=tab:>\ ,trail:~,extends:>,precedes:<,nbsp:+
 set list
 set cursorline
