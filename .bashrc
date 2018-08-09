@@ -7,8 +7,13 @@ export EDITOR=vim
 if type rg > /dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND="rg --files"
 fi
-export GPG_TTY=$(tty)
+
+# give me nice colors
 export TERM=xterm-256color
+# do not pollute my directories with undo files
+[ -d ~/.vim/undodir ] || mkdir -p ~/.vim/undodir
+# for signing git commits
+export GPG_TTY=$(tty)
 
 # HIST* are bash-only variables, not environmental variables, so do not 'export'
 # ignoredups only ignores _consecutive_ duplicates.

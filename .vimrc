@@ -205,6 +205,7 @@ set spell
 set mouse=a
 set autowrite
 set undofile
+set undodir=~/.vim/undodir
 
 " why doesn't my mouse work past the 220th column?
 if has("mouse_sgr")
