@@ -7,6 +7,7 @@ export EDITOR=vim
 # so use that instead :/
 export FZF_DEFAULT_COMMAND="rg --files"
 export GPG_TTY=$(tty)
+export TERM=xterm-256color
 
 # HIST* are bash-only variables, not environmental variables, so do not 'export'
 # ignoredups only ignores _consecutive_ duplicates.
