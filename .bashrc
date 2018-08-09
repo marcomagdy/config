@@ -3,9 +3,10 @@ set -o vi
 
 #set vim as default editor
 export EDITOR=vim
-# fzf doesn't have its own ignore file, it relies on the input of 'find', however, ripgrep honors ~/.ignore file, 
-# so use that instead :/
-export FZF_DEFAULT_COMMAND="rg --files"
+# prefer ripgrep if it exists because it honors .ignore entries and it's faster
+if type rg > /dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND="rg --files"
+fi
 export GPG_TTY=$(tty)
 export TERM=xterm-256color
 
@@ -61,4 +62,5 @@ fi
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 # from https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 [ -f ~/git-completion.bash ] && source ~/git-completion.bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
