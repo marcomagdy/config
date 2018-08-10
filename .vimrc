@@ -1,3 +1,5 @@
+" download and install vim-plugged via:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 let mapleader="," " leader is a comma
 
 " relood the current vimrc file
