@@ -134,6 +134,7 @@ let g:airline_right_sep = ''
 let g:sneak#s_next = 1
 let g:sneak#f_reset = 1
 let g:sneak#label = 1
+let g:sneak#use_ic_scs = 1
 
 " use ripgrep (rg) as default grep program
 if executable('rg')
