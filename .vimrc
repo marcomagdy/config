@@ -118,6 +118,8 @@ elseif executable('make')
     set makeprg=make\ -C\ build
 endif
 
+set enc=utf-8
+set noswf " no swap file
 
 set go-=T "hide toolbar and the gui tabs
 set go-=e "Use non-gui tabs
