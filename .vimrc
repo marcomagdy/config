@@ -89,6 +89,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-sneak'
+Plug 'machakann/vim-highlightedyank'
 call plug#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -103,6 +104,7 @@ let g:sneak#s_next = 1
 let g:sneak#f_reset = 1
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
+let g:highlightedyank_highlight_duration = 750
 
 " use ripgrep (rg) as default grep program
 if executable('rg')
