@@ -178,7 +178,7 @@ set showmode                    " show the current mode
 set colorcolumn=120             " display a line length marker
 set spell
 set mouse=a
-set autowrite
+set hidden
 set undofile
 set undodir=~/.vim/undodir
 
