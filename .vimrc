@@ -45,18 +45,6 @@ nnoremap <Leader>v :call VsplitBuffer()<CR>
 map <S-W> <Plug>CamelCaseMotion_w
 map <S-B> <Plug>CamelCaseMotion_b
 
-fun! IsWindows()
-    return has('win32') || has('win64')
-endfun
-
-fun! IsMac()
-    return has('gui_macvim')
-endfun
-
-fun! IsUnix()
-    return has('unix')
-endfun
-
 "check if NERDTree buffer is open in the current tab
 fun! IsNerdTreeOpen()
     return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
@@ -70,26 +58,6 @@ fun! SmartToggleNERDTree()
         NERDTreeFind
     endif
 endfun
-
-":GrepBufs <input>
-":cn next match
-":cp previous match
-function! BuffersList()
-  let all = range(0, bufnr('$'))
-  let res = []
-  for b in all
-    if buflisted(b)
-      call add(res, bufname(b))
-    endif
-  endfor
-  return res
-endfunction
-
-function! GrepBuffers (expression)
-  exec 'vimgrep/'.a:expression.'/ '.join(BuffersList())
-endfunction
-
-command! -nargs=+ GrepBufs call GrepBuffers(<q-args>)
 
 function! VsplitBuffer()
     call inputsave()
