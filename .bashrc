@@ -64,8 +64,9 @@ if [[ "$(uname)" == Darwin ]]; then
 fi
 
 
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 # from https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 [ -f ~/git-completion.bash ] && source ~/git-completion.bash
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
+
