@@ -77,7 +77,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-surround'
 Plug 'thinca/vim-quickrun'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -178,9 +177,10 @@ set showmode                    " show the current mode
 set colorcolumn=120             " display a line length marker
 set spell
 set mouse=a
-set hidden
+set hidden                      " switching from a modified buffer hides it. Avoids the 'must save or discard' warning
 set undofile
 set undodir=~/.vim/undodir
+set autowrite                   " save the buffers to disk when running commands like 'make'
 
 " why doesn't my mouse work past the 220th column?
 if has("mouse_sgr")
