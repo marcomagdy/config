@@ -22,14 +22,13 @@ export HISTCONTROL=erasedups:ignoreboth
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
 export HISTSIZE=
 export HISTFILESIZE=
-export HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd'
+export HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd:clear'
 export HISTTIMEFORMAT="[%F %T]"
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
 export HISTFILE=~/.bash_eternal_history
 # append to the history file, don't overwrite it
 shopt -s histappend
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND" # append history file after each command
 
 # truncate long paths to ".../foo/bar/baz"
 export PROMPT_DIRTRIM=4
@@ -37,30 +36,23 @@ export PROMPT_DIRTRIM=4
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 
-#try to find git-prompt.sh if __git_ps1 was not automatically provided.
-if ! type -t __git_ps1 > /dev/null 2>&1 ; then
-    #cygwin (non-msysgit): try to find git-prompt.sh
-    gitprompt_home="$HOME/.git-prompt.sh" 
-    [ -e "$gitprompt_home" ] && source "$gitprompt_home"
-fi
-
 PS1='\[\033[0;32m\]\u@\h [\t] \[\033[33m\]\w\[\033[0m\]'
 
-
-# set git prompt iff function exists.
-if type -t __git_ps1 &> /dev/null ; then
-    PS1=$PS1'\[\033[1;36m$(__git_ps1)\033[0m\]'
+if [ -f ~/.git-prompt.sh ]; then
     GIT_PS1_STATESEPARATOR=""
     GIT_PS1_SHOWUPSTREAM="verbose"
-    GIT_PS1_SHOWCOLORHINTS=1
+    GIT_PS1_SHOWDIRTYSTATE=true
+    GIT_PS1_SHOWUNTRACKEDFILES=true
+    source ~/.git-prompt.sh
+    PS1=$PS1'\[\033[1;36m$(__git_ps1)\033[0m\]'
 fi
 
 PS1=$PS1'
 $ '
 
-if [[ "$(uname)" == Darwin ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
 
-    alias ls='ls -ahlGC'
+    alias ls='ls -ahl'
 fi
 
 
