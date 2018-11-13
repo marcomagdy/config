@@ -15,6 +15,8 @@ nnoremap <leader>t :Tags<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>g :BLines<CR>
 nnoremap <leader>m :make<CR><CR>
+" sane Y
+nnoremap Y y$
 inoremap jj <ESC>
 noremap 0 $
 
