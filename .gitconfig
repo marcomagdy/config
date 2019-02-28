@@ -1,5 +1,6 @@
 [user]
-    name = Marco Magdy
+	name = Marco Magdy
+	email = mmagdy@gmail.com
 [color]
     ui = auto
 [color "branch"]
@@ -27,10 +28,14 @@
     co  = checkout
     br  = branch
     ss  = status -s
+    cc  = commit -v
+    ca  = commit --amend
+    ce  = commit --amend --no-edit
+    cf  = commit --fixup
 [diff]
     tool = bc3
 [merge]
-	tool = bc3
+	tool = vimdiff
     conflictstyle = diff3
 [github]
     user = marcomagdy
