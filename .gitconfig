@@ -1,6 +1,6 @@
 [user]
-	name = Marco Magdy
-	email = mmagdy@gmail.com
+    name = Marco Magdy
+    email = mmagdy@gmail.com
 [color]
     ui = auto
 [color "branch"]
@@ -32,14 +32,12 @@
     ca  = commit --amend
     ce  = commit --amend --no-edit
     cf  = commit --fixup
-[diff]
-    tool = bc3
 [merge]
-	tool = vimdiff
+    tool = vimdiff
     conflictstyle = diff3
+[rerere]
+    enabled = true
 [github]
     user = marcomagdy
 [include]
     path = ~/.gitconfig.local
-[mergetool "bc3"]
-	trustExitCode = true
