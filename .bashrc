@@ -59,6 +59,9 @@ fi
 [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 # from https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 [ -f ~/git-completion.bash ] && source ~/git-completion.bash
+# brew install fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# brew install z
+[ -f /usr/local/etc/profile.d/z.sh ] && source /usr/local/etc/profile.d/z.sh
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
