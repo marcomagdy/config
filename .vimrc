@@ -29,7 +29,6 @@ nnoremap <leader>x :new %<CR><C-o>:pc<CR>
 " \1 \2 \3 : go to buffer 1/2/3 etc
 nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>
-nnoremap <C-j> :e#<CR>
 "close current buffer
 nnoremap <Leader>d :bdelete<CR>
 "force close current buffer, even if there're unsaved changes
@@ -89,8 +88,11 @@ Plug 'tommcdo/vim-lion'
 Plug 'junegunn/fzf.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
 Plug 'justinmk/vim-sneak'
 Plug 'machakann/vim-highlightedyank'
+Plug 'mhinz/vim-tree'
+" Plug 'zxqfl/tabnine-vim'
 call plug#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,12 +179,14 @@ set laststatus=2                " make the last line where the status is two lin
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set showmode                    " show the current mode
 set colorcolumn=120             " display a line length marker
+set textwidth=120
 set spell
 set mouse=a
 set hidden                      " switching from a modified buffer hides it. Avoids the 'must save or discard' warning
 set undofile
 set undodir=~/.vim/undodir
 set autowrite                   " save the buffers to disk when running commands like 'make'
+set dip+=vertical               " diffopt - open diff in vertical windows
 
 " why doesn't my mouse work past the 220th column?
 if has("mouse_sgr")
