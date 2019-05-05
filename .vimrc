@@ -71,7 +71,6 @@ endfunction
 " Vundle
 set nocompatible                " vi compatible is LAME
 filetype off
-set rtp+=/usr/local/opt/fzf
 call plug#begin('~/.vim/plugged')
 Plug 'bkad/CamelCaseMotion'
 Plug 'scrooloose/nerdtree'
@@ -86,6 +85,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'tommcdo/vim-lion'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
