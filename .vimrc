@@ -148,6 +148,7 @@ highlight Visual       ctermbg=15   ctermfg=163
 " highlight Pmenu        ctermbg=240 ctermfg=12
 " highlight PmenuSel     ctermbg=3   ctermfg=1
 " highlight SpellBad     ctermbg=0   ctermfg=1
+highlight SpellBad     cterm=underline
 
 "---------------------------------------------
 
