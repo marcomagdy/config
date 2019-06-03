@@ -37,6 +37,8 @@
     conflictstyle = diff3
 [rerere]
     enabled = true
+[rebase]
+    autosquash = true
 [github]
     user = marcomagdy
 [include]
