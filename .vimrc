@@ -188,6 +188,7 @@ set undofile
 set undodir=~/.vim/undodir
 set autowrite                   " save the buffers to disk when running commands like 'make'
 set dip+=vertical               " diffopt - open diff in vertical windows
+set nomodeline                  " disable executing some ex commands embedded in text file
 
 " why doesn't my mouse work past the 220th column?
 if has("mouse_sgr")
