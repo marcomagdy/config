@@ -72,6 +72,7 @@ endfunction
 set nocompatible                " vi compatible is LAME
 filetype off
 call plug#begin('~/.vim/plugged')
+Plug 'ajh17/VimCompletesMe'
 Plug 'bkad/CamelCaseMotion'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/tComment'
