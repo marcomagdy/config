@@ -110,6 +110,9 @@ let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 let g:highlightedyank_highlight_duration = 750
 
+let g:quickrun_config = {}
+let g:quickrun_config.cpp = {'cmdopt' : '-std=c++17 -Wall -Wextra'}
+
 " use ripgrep (rg) as default grep program
 if executable('rg')
     set grepprg=rg\ -S\ --vimgrep
