@@ -73,6 +73,7 @@ set nocompatible                " vi compatible is LAME
 filetype off
 call plug#begin('~/.vim/plugged')
 Plug 'ajh17/VimCompletesMe'
+let b:vcm_tab_complete = 'tags'
 Plug 'bkad/CamelCaseMotion'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/tComment'
