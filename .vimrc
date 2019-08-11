@@ -73,7 +73,10 @@ set nocompatible                " vi compatible is LAME
 filetype off
 call plug#begin('~/.vim/plugged')
 Plug 'ajh17/VimCompletesMe'
-let b:vcm_tab_complete = 'tags'
+" let b:vcm_tab_complete = 'tags'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
 Plug 'bkad/CamelCaseMotion'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/tComment'
@@ -113,6 +116,24 @@ let g:highlightedyank_highlight_duration = 750
 
 let g:quickrun_config = {}
 let g:quickrun_config.cpp = {'cmdopt' : '-std=c++17 -Wall -Wextra'}
+
+if executable('clangd')
+    augroup lsp_clangd
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd', '-compile-commands-dir='.$PWD.'/build']},
+                    \ 'whitelist': ['c', 'cpp', 'cc', 'objc', 'objcpp'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType cc setlocal omnifunc=lsp#complete
+        autocmd FileType objc setlocal omnifunc=lsp#complete
+        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+
+        autocmd FileType cpp nnoremap gd :LspDefinition<CR>
+    augroup end
+endif
 
 " use ripgrep (rg) as default grep program
 if executable('rg')
