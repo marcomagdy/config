@@ -117,7 +117,7 @@ let g:sneak#use_ic_scs = 1
 let g:highlightedyank_highlight_duration = 750
 
 let g:quickrun_config = {}
-let g:quickrun_config.cpp = {'cmdopt' : '-std=c++17 -Wall -Wextra'}
+let g:quickrun_config.cpp = {'cmdopt' : '-fsanitize=address -std=c++17 -Wall -Wextra'}
 
 if executable('clangd')
     augroup lsp_clangd
