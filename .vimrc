@@ -122,11 +122,13 @@ let g:quickrun_config.cpp = {'cmdopt' : '-fsanitize=address -std=c++17 -Wall -We
 if executable('clangd')
     augroup lsp_clangd
         autocmd!
-        autocmd User lsp_setup call lsp#register_server({
+        let g:lsp_diagnostics_enabled = 0
+        autocmd User lsp_setup if g:lsp_diagnostics_enabled | call lsp#register_server({
                     \ 'name': 'clangd',
                     \ 'cmd': {server_info->['clangd', '-compile-commands-dir='.$PWD.'/build']},
                     \ 'whitelist': ['c', 'cpp', 'cc', 'objc', 'objcpp'],
                     \ })
+                    \ | endif
         autocmd FileType c setlocal omnifunc=lsp#complete
         autocmd FileType cpp setlocal omnifunc=lsp#complete
         autocmd FileType cc setlocal omnifunc=lsp#complete
@@ -135,7 +137,10 @@ if executable('clangd')
 
         autocmd FileType cpp nnoremap gd :LspDefinition<CR>
     augroup end
+    command! ToggleLsp  let g:lsp_diagnostics_enabled = !g:lsp_diagnostics_enabled
 endif
+
+
 
 " use ripgrep (rg) as default grep program
 if executable('rg')
