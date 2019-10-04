@@ -122,7 +122,7 @@ let g:quickrun_config.cpp = {'cmdopt' : '-fsanitize=address -std=c++17 -Wall -We
 if executable('clangd')
     augroup lsp_clangd
         autocmd!
-        let g:lsp_diagnostics_enabled = 0
+        let g:lsp_diagnostics_enabled = 1 " default must be 'enabled' for the toggle to work
         autocmd User lsp_setup if g:lsp_diagnostics_enabled | call lsp#register_server({
                     \ 'name': 'clangd',
                     \ 'cmd': {server_info->['clangd', '-compile-commands-dir='.$PWD.'/build']},
