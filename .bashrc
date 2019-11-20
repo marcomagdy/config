@@ -17,16 +17,16 @@ export GPG_TTY=$(tty)
 
 # HIST* are bash-only variables, not environmental variables, so do not 'export'
 # ignoredups only ignores _consecutive_ duplicates.
-export HISTCONTROL=erasedups:ignoreboth
+HISTCONTROL=erasedups:ignoreboth
 # Undocumented feature which sets the size to "unlimited".
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
-export HISTSIZE=
-export HISTFILESIZE=
-export HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd:clear'
-export HISTTIMEFORMAT="[%F %T]"
+HISTSIZE=
+HISTFILESIZE=
+HISTIGNORE='logout:exit:cd:ls:bg:fg:history:clear'
+HISTTIMEFORMAT="[%F %T]"
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
-export HISTFILE=~/.bash_eternal_history
+HISTFILE=~/.bash_eternal_history
 # append to the history file, don't overwrite it
 shopt -s histappend
 
