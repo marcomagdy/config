@@ -17,6 +17,7 @@ nnoremap <leader>g :BLines<CR>
 nnoremap <leader>m :make<CR><CR>
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cc :cclose<CR>
+nnoremap <leader>af :Autoformat<CR>
 " sane Y
 nnoremap Y y$
 inoremap jj <ESC>
