@@ -37,6 +37,8 @@ nnoremap <Leader>d :bdelete<CR>
 "force close current buffer, even if there're unsaved changes
 nnoremap <Leader>fd :bdelete!<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
+"close _s_pecific buffer without switching to it first
+nnoremap <Leader>sd :call CloseSpecificBuffer()<CR>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
 " nnoremap <Leader>g :e#<CR>
@@ -65,9 +67,16 @@ endfun
 
 function! VsplitBuffer()
     call inputsave()
-    let buf_num = input('Which buffer?')
+    let buf_num = input('Enter buffer number to vsplit:')
     call inputrestore()
     exec 'vsp | b '.buf_num
+endfunction
+
+function! CloseSpecificBuffer()
+    call inputsave()
+    let buf_num = input('Enter buffer number to close:')
+    call inputrestore()
+    exec 'bd '.buf_num
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -126,7 +135,7 @@ if executable('clangd')
         let g:lsp_diagnostics_enabled = 1 " default must be 'enabled' for the toggle to work
         autocmd User lsp_setup if g:lsp_diagnostics_enabled | call lsp#register_server({
                     \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd', '-compile-commands-dir='.$PWD.'/build']},
+                    \ 'cmd': {server_info->['clangd']},
                     \ 'whitelist': ['c', 'cpp', 'cc', 'objc', 'objcpp'],
                     \ })
                     \ | endif
