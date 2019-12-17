@@ -36,6 +36,7 @@ nnoremap <C-h> :bp<CR>
 nnoremap <Leader>d :call CloseBufferAndDisplayNext(0)<CR>
 "force close current buffer, even if there're unsaved changes
 nnoremap <Leader>fd :call CloseBufferAndDisplayNext(1)<CR>
+nnoremap <Leader>wd :bdelete!<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
