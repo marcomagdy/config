@@ -32,13 +32,11 @@ nnoremap <leader>x :new %<CR><C-o>:pc<CR>
 " \1 \2 \3 : go to buffer 1/2/3 etc
 nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>
-"close current buffer
-nnoremap <Leader>d :bdelete<CR>
+"close current buffer (without losing the split state of the window)
+nnoremap <Leader>d :call CloseBufferAndDisplayNext(0)<CR>
 "force close current buffer, even if there're unsaved changes
-nnoremap <Leader>fd :bdelete!<CR>
+nnoremap <Leader>fd :call CloseBufferAndDisplayNext(1)<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
-"close _s_pecific buffer without switching to it first
-nnoremap <Leader>sd :call CloseSpecificBuffer()<CR>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
 " nnoremap <Leader>g :e#<CR>
@@ -67,16 +65,19 @@ endfun
 
 function! VsplitBuffer()
     call inputsave()
-    let buf_num = input('Enter buffer number to vsplit:')
+    let l:buf_num = input('Enter buffer number to vsplit:')
     call inputrestore()
     exec 'vsp | b '.buf_num
 endfunction
 
-function! CloseSpecificBuffer()
-    call inputsave()
-    let buf_num = input('Enter buffer number to close:')
-    call inputrestore()
-    exec 'bd '.buf_num
+function! CloseBufferAndDisplayNext(force)
+    let l:cur_buf = bufnr("%")
+    exec 'bn'
+    if a:force
+        exec 'bd! '.cur_buf
+    else
+        exec 'bd '.cur_buf
+    endif
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -108,7 +109,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'justinmk/vim-sneak'
 Plug 'machakann/vim-highlightedyank'
-Plug 'mhinz/vim-tree'
+Plug 'wellle/targets.vim'
 " Plug 'zxqfl/tabnine-vim'
 call plug#end()
 filetype plugin indent on "required
@@ -135,7 +136,7 @@ if executable('clangd')
         let g:lsp_diagnostics_enabled = 1 " default must be 'enabled' for the toggle to work
         autocmd User lsp_setup if g:lsp_diagnostics_enabled | call lsp#register_server({
                     \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd']},
+                    \ 'cmd': {server_info->['clangd','--clang-tidy', '--suggest-missing-includes']},
                     \ 'whitelist': ['c', 'cpp', 'cc', 'objc', 'objcpp'],
                     \ })
                     \ | endif
