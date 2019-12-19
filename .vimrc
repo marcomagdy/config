@@ -75,9 +75,10 @@ function! CloseBufferAndDisplayNext(force)
     let l:cur_buf = bufnr("%")
     exec 'bn'
     if a:force
-        exec 'bd! '.cur_buf
+        exec 'bdelete! '.cur_buf
     else
-        exec 'bd '.cur_buf
+        "bdelete will close the window (losing the split) if the same file is open in two buffers
+        exec 'hide '.cur_buf
     endif
 endfunction
 
