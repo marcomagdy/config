@@ -1,0 +1,27 @@
+export PATH='/usr/local/opt/llvm/bin':$PATH
+export CC=clang-7
+export CXX=clang++
+
+#vcpkg
+alias vcpkg='~/projects/vcpkg/vcpkg'
+export VCPKG_ROOT='/Users/magmarco/projects/vcpkg/'
+
+export ANDROID_NDK=~/android-ndk-r12b
+
+function switch-to-apple-clang() {
+    export CC=/Library/Developer/CommandLineTools/usr/bin/clang
+    export CXX=/Library/Developer/CommandLineTools/usr/bin/clang++
+    $CXX --version
+}
+
+function switch-to-llvm() {
+    export CC=`which clang-9`
+    export CXX=`which clang++`
+    $CXX --version
+}
+
+function switch-to-gcc8() {
+    export CC=gcc-8
+    export CXX=g++-8
+    $CXX --version
+}
