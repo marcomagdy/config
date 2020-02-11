@@ -1,0 +1,21 @@
+function switch-to-clang9() { # installed via apt
+    export CC=clang-9
+    export CXX=clang++-9
+    $CXX --version
+}
+
+function switch-to-gcc9() { # installed via brew
+    export CC=gcc-9
+    export CXX=g++-9
+    $CXX --version
+}
+
+switch-to-clang9
+
+[ -f ~/z.sh ] && source ~/z.sh
+
+export GOPATH=$HOME/go
+export BUILDIFIER_BIN=$GOPATH/bin/buildifier
+export BUILDOZER_BIN=$GOPATH/bin/buildozer
+PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/go/bin:$PATH:$GPATH/bin
+
