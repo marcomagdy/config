@@ -23,7 +23,6 @@ HISTCONTROL=erasedups:ignoreboth
 HISTSIZE=
 HISTFILESIZE=
 HISTIGNORE='logout:exit:cd:ls:bg:fg:history:clear'
-HISTTIMEFORMAT="[%F %T]"
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
 HISTFILE=~/.bash_eternal_history
@@ -65,3 +64,4 @@ fi
 [ -f /usr/local/etc/profile.d/z.sh ] && source /usr/local/etc/profile.d/z.sh
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
+trap "~/history-dedup $HISTFILE" EXIT
