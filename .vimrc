@@ -13,7 +13,7 @@ nnoremap <leader><space> :noh<CR>
 nnoremap <leader>e :Files<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>g :BLines<CR>
+nnoremap <leader>/ :BLines<CR>
 nnoremap <leader>m :make<CR><CR>
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cc :cclose<CR>
@@ -37,7 +37,6 @@ nnoremap <C-h> :bp<CR>
 nnoremap <Leader>d :call CloseBufferAndDisplayNext(0)<CR>
 "force close current buffer, even if there're unsaved changes
 nnoremap <Leader>fd :call CloseBufferAndDisplayNext(1)<CR>
-nnoremap <Leader>wd :bdelete!<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
@@ -79,7 +78,7 @@ function! CloseBufferAndDisplayNext(force)
         exec 'bdelete! '.cur_buf
     else
         "bdelete will close the window (losing the split) if the same file is open in two buffers
-        exec 'hide '.cur_buf
+        exec 'bdelete '.cur_buf
     endif
 endfunction
 
