@@ -22,6 +22,7 @@ nnoremap <leader>af :Autoformat<CR>
 nnoremap Y y$
 inoremap jj <ESC>
 noremap 0 $
+nnoremap K i<CR><ESC>g;x
 
 " when stuck in the last preview-window, change it to a normal window
 nnoremap <leader>x :new %<CR><C-o>:pc<CR>
