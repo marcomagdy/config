@@ -22,7 +22,7 @@ nnoremap <leader>af :Autoformat<CR>
 nnoremap Y y$
 inoremap jj <ESC>
 noremap 0 $
-nnoremap K i<CR><ESC>g;x
+nnoremap K :call SplitLine()<CR>
 
 " when stuck in the last preview-window, change it to a normal window
 nnoremap <leader>x :new %<CR><C-o>:pc<CR>
@@ -79,6 +79,14 @@ function! CloseBufferAndDisplayNext(force)
     else
         "bdelete will close the window (losing the split) if the same file is open in two buffers
         exec 'bdelete '.cur_buf
+    endif
+endfunction
+
+function! SplitLine()
+    exec "normal! i\<CR>\<ESC>k$"
+    let l:ch = getline('.')[col('.') - 1]
+    if l:ch =~ '\s'
+        exec "normal! x"
     endif
 endfunction
 
