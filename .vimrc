@@ -38,6 +38,8 @@ nnoremap <Leader>d :call CloseBufferAndDisplayNext(0)<CR>
 "force close current buffer, even if there're unsaved changes
 nnoremap <Leader>fd :call CloseBufferAndDisplayNext(1)<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
+" turn terminal window into a normal buffer
+tnoremap <C-n> <C-\><C-n>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
 " nnoremap <Leader>g :e#<CR>
