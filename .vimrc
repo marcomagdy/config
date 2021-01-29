@@ -1,5 +1,8 @@
-" download and install vim-plugged via:
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
 let mapleader="," " leader is a comma
 
 " relood the current vimrc file
@@ -18,6 +21,9 @@ nnoremap <leader>m :make<CR><CR>
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cc :cclose<CR>
 nnoremap <leader>af :Autoformat<CR>
+nnoremap <leader>lo :lopen<CR>
+nnoremap <leader>lc :lclose<CR>
+nnoremap <leader>+ :call CopyBufferFullPath()<CR>
 " sane Y
 nnoremap Y y$
 inoremap jj <ESC>
@@ -38,7 +44,9 @@ nnoremap <Leader>d :call CloseBufferAndDisplayNext(0)<CR>
 "force close current buffer, even if there're unsaved changes
 nnoremap <Leader>fd :call CloseBufferAndDisplayNext(1)<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
-" turn terminal window into a normal buffer
+nnoremap <Leader>s :call HsplitBuffer()<CR>
+nmap  -  <Plug>(choosewin)
+" turn terminal window into a normal window 
 tnoremap <C-n> <C-\><C-n>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
@@ -73,6 +81,19 @@ function! VsplitBuffer()
     exec 'vsp | b '.buf_num
 endfunction
 
+function! HsplitBuffer()
+    call inputsave()
+    let l:buf_num = input('Enter buffer number to split:')
+    call inputrestore()
+    exec 'sp | b '.buf_num
+endfunction
+
+" Copies the full path of the file in the current buffer to the system clipboard
+function! CopyBufferFullPath()
+    let @+ = expand("%:p")
+	echo @+
+endfunction
+
 function! CloseBufferAndDisplayNext(force)
     let l:cur_buf = bufnr("%")
     exec 'bn'
@@ -93,7 +114,6 @@ function! SplitLine()
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
 set nocompatible                " vi compatible is LAME
 filetype off
 call plug#begin('~/.vim/plugged')
@@ -114,18 +134,25 @@ Plug 'marcomagdy/gruvbox'
 Plug 'tpope/vim-unimpaired'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'tommcdo/vim-lion'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'justinmk/vim-sneak'
 Plug 'machakann/vim-highlightedyank'
 Plug 'wellle/targets.vim'
-" Plug 'zxqfl/tabnine-vim'
+Plug 't9md/vim-choosewin'
 call plug#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:fzf_preview_window = [] " preview window slows down things considerably, so disable it.
+" ctrl-v should be ctrl-s to be consistent with nerdtree BUT tmux uses ctrl-s, so we can't.
+let g:fzf_action = {
+			\ 'ctrl-i': 'split',
+			\ 'ctrl-v': 'vsplit',
+			\ 'ctrl-t': 'tab split'}
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
