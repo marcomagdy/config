@@ -158,8 +158,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dark'
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
 let g:sneak#s_next = 1
 let g:sneak#f_reset = 1
 let g:sneak#label = 1
@@ -209,7 +207,7 @@ set noswf " no swap file
 
 set go-=T "hide toolbar and the gui tabs
 set go-=e "Use non-gui tabs
-set guifont=Consolas:h14
+set guifont=Consolas_NF:h14
 "----------------COLORS------------------------------
 let g:gruvbox_contrast_dark='medium'
 let c_space_errors=1
