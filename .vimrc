@@ -1,6 +1,6 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
 let mapleader="," " leader is a comma
@@ -18,6 +18,7 @@ nnoremap <leader>t :Tags<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>/ :BLines<CR>
 nnoremap <leader>m :make<CR><CR>
+nnoremap <leader>r :QuickRun<CR>
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cc :cclose<CR>
 nnoremap <leader>af :Autoformat<CR>
@@ -46,7 +47,7 @@ nnoremap <Leader>fd :call CloseBufferAndDisplayNext(1)<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
 nnoremap <Leader>s :call HsplitBuffer()<CR>
 nmap  -  <Plug>(choosewin)
-" turn terminal window into a normal window 
+" turn terminal window into a normal window
 tnoremap <C-n> <C-\><C-n>
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
@@ -91,7 +92,7 @@ endfunction
 " Copies the full path of the file in the current buffer to the system clipboard
 function! CopyBufferFullPath()
     let @+ = expand("%:p")
-	echo @+
+    echo @+
 endfunction
 
 function! CloseBufferAndDisplayNext(force)
@@ -131,18 +132,20 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'marcomagdy/gruvbox'
+Plug 'Mofiqul/vscode.nvim'
 Plug 'tpope/vim-unimpaired'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'tommcdo/vim-lion'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'Chiel92/vim-autoformat'
+Plug 'vim-autoformat/vim-autoformat'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'justinmk/vim-sneak'
 Plug 'machakann/vim-highlightedyank'
 Plug 'wellle/targets.vim'
 Plug 't9md/vim-choosewin'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -150,9 +153,9 @@ filetype plugin indent on "required
 let g:fzf_preview_window = [] " preview window slows down things considerably, so disable it.
 " ctrl-v should be ctrl-s to be consistent with nerdtree BUT tmux uses ctrl-s, so we can't.
 let g:fzf_action = {
-			\ 'ctrl-i': 'split',
-			\ 'ctrl-v': 'vsplit',
-			\ 'ctrl-t': 'tab split'}
+            \ 'ctrl-i': 'split',
+            \ 'ctrl-v': 'vsplit',
+            \ 'ctrl-t': 'tab split'}
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -188,7 +191,20 @@ if executable('clangd')
     command! ToggleLsp  let g:lsp_diagnostics_enabled = !g:lsp_diagnostics_enabled
 endif
 
-
+if executable('sourcekit-lsp')
+    augroup lsp_swift
+        autocmd!
+        let g:lsp_diagnostics_enabled = 1 " default must be 'enabled' for the toggle to work
+        autocmd User lsp_setup if g:lsp_diagnostics_enabled | call lsp#register_server({
+                    \ 'name': 'sourcekit-lsp',
+                    \ 'cmd': {server_info->['sourcekit-lsp']},
+                    \ 'whitelist': ['swift'],
+                    \ }) | endif
+        autocmd FileType swift setlocal omnifunc=lsp#complete
+        autocmd FileType swift nnoremap gd :LspDefinition<CR>
+    augroup end
+    command! ToggleLsp  let g:lsp_diagnostics_enabled = !g:lsp_diagnostics_enabled
+endif
 
 " use ripgrep (rg) as default grep program
 if executable('rg')
@@ -211,7 +227,8 @@ set guifont=Consolas_NF:h14
 "----------------COLORS------------------------------
 let g:gruvbox_contrast_dark='medium'
 let c_space_errors=1
-color gruvbox
+" color gruvbox
+color vscode
 syn on
 set background=dark "useful in gui version
 
@@ -254,7 +271,7 @@ set smartcase
 set ignorecase
 set lazyredraw
 set ai                          " set auto-indenting on for programming
-set showmatch                   " automatically show matching brackets. 
+set showmatch                   " automatically show matching brackets.
 set vb                          " turn on the "visual bell" - which is much quieter than the "audio blink"
 set ruler                       " show the cursor position all the time
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
@@ -276,6 +293,6 @@ if has("mouse_sgr")
     set ttymouse=sgr
 elseif !has('nvim')
     set ttymouse=xterm2
-end
+    end
 
 
