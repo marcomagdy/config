@@ -280,7 +280,7 @@ set backspace=indent,eol,start  " make that backspace key work the way it should
 set showmode                    " show the current mode
 set colorcolumn=120             " display a line length marker
 set textwidth=120
-set spell
+set nospell
 set mouse=a
 set hidden                      " switching from a modified buffer hides it. Avoids the 'must save or discard' warning
 set undofile
