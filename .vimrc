@@ -28,6 +28,7 @@ nnoremap <leader>+ :call CopyBufferFullPath()<CR>
 " sane Y
 nnoremap Y y$
 inoremap jj <ESC>
+tnoremap jj <C-\><C-n>
 noremap 0 $
 nnoremap K :call SplitLine()<CR>
 
