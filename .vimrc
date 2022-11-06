@@ -153,6 +153,9 @@ filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:fzf_preview_window = [] " preview window slows down things considerably, so disable it.
+" Teach AutoFormat about swiftformat
+let g:formatdef_swiftfmt = '"swiftformat"'
+let g:formatters_swift = ['swiftfmt']
 " ctrl-v should be ctrl-s to be consistent with nerdtree BUT tmux uses ctrl-s, so we can't.
 let g:fzf_action = {
             \ 'ctrl-i': 'split',
