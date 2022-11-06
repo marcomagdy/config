@@ -50,6 +50,8 @@ nnoremap <Leader>s :call HsplitBuffer()<CR>
 nmap  -  <Plug>(choosewin)
 " turn terminal window into a normal window
 tnoremap <C-n> <C-\><C-n>
+inoremap <C-l> <Plug>(copilot-next)
+inoremap <C-h> <Plug>(copilot-previous)
 " nnoremap <Leader>b :bp<CR>
 " nnoremap <Leader>f :bn<CR>
 " nnoremap <Leader>g :e#<CR>
@@ -119,11 +121,8 @@ endfunction
 set nocompatible                " vi compatible is LAME
 filetype off
 call plug#begin('~/.vim/plugged')
-Plug 'ajh17/VimCompletesMe'
-" let b:vcm_tab_complete = 'tags'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
-
 Plug 'bkad/CamelCaseMotion'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/tComment'
@@ -147,6 +146,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'wellle/targets.vim'
 Plug 't9md/vim-choosewin'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'github/copilot.vim'
+
 call plug#end()
 filetype plugin indent on "required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
