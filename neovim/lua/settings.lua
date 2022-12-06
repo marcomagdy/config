@@ -26,16 +26,32 @@ require("nvim-treesitter.configs").setup {
     },
 }
 
-local lspconfig = require('lspconfig')
-lspconfig.clangd.setup {
-    on_attach = function(client, bufnr)
+function lsp_key_bindings(client, bufnr)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0}) -- 'gd' go to definition
-        vim.keymap.set("n", "gi", vim.lsp.buf.hover, {buffer=0}) -- 'gi' go to info
+        vim.keymap.set("n", "gi", vim.lsp.buf.hover, {buffer=bufnr}) -- 'gi' go to info
+        vim.keymap.set("n", "gr", vim.lsp.buf.rename, {buffer=bufnr}) -- 'gr' go rename
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {buffer=0}) -- 'ca' code-action
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {buffer=0})
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {buffer=0})
-    end
+end
+
+local lspconfig = require('lspconfig')
+lspconfig.clangd.setup {
+    on_attach = lsp_key_bindings
 }
+
+lspconfig.sourcekit.setup {
+    on_attach = lsp_key_bindings
+}
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+    }
+)
+
 local diagnostic_config = {
         update_in_insert = false,
         underline = true,
