@@ -34,7 +34,7 @@
     cf  = commit --fixup
 [merge]
     tool = vimdiff
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [rerere]
     enabled = true
 [rebase]
