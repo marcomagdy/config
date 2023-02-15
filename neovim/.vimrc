@@ -25,10 +25,10 @@ nnoremap <leader>af :Autoformat<CR>
 nnoremap <leader>lo :lopen<CR>
 nnoremap <leader>lc :lclose<CR>
 nnoremap <leader>+ :call CopyBufferFullPath()<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 " sane Y
 nnoremap Y y$
 inoremap jj <ESC>
-tnoremap jj <C-\><C-n>
 noremap 0 $
 nnoremap K :call SplitLine()<CR>
 
@@ -121,8 +121,10 @@ endfunction
 set nocompatible                " vi compatible is LAME
 filetype off
 call plug#begin('~/.vim/plugged')
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
+" Plug 'ajh17/VimCompletesMe'
+" let b:vcm_tab_complete = 'tags'
+Plug 'neovim/nvim-lspconfig'
+
 Plug 'bkad/CamelCaseMotion'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/tComment'
@@ -131,7 +133,6 @@ Plug 'thinca/vim-quickrun'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'marcomagdy/gruvbox'
 Plug 'Mofiqul/vscode.nvim'
 Plug 'tpope/vim-unimpaired'
 Plug 'PeterRincker/vim-argumentative'
@@ -147,6 +148,7 @@ Plug 'wellle/targets.vim'
 Plug 't9md/vim-choosewin'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'github/copilot.vim'
+Plug 'mbbill/undotree'
 
 call plug#end()
 filetype plugin indent on "required
@@ -154,7 +156,7 @@ filetype plugin indent on "required
 
 " let g:fzf_preview_window = [] " preview window slows down things considerably, so disable it.
 " Teach AutoFormat about swiftformat
-let g:formatdef_swiftfmt = '"swiftformat"'
+let g:formatdef_swiftfmt = '"swiftformat --self insert"'
 let g:formatters_swift = ['swiftfmt']
 " ctrl-v should be ctrl-s to be consistent with nerdtree BUT tmux uses ctrl-s, so we can't.
 let g:fzf_action = {
@@ -175,41 +177,6 @@ let g:highlightedyank_highlight_duration = 750
 let g:quickrun_config = {}
 let g:quickrun_config.cpp = {'cmdopt' : '-fsanitize=address -std=c++17 -Wall -Wextra'}
 
-if executable('clangd')
-    augroup lsp_clangd
-        autocmd!
-        let g:lsp_diagnostics_enabled = 1 " default must be 'enabled' for the toggle to work
-        autocmd User lsp_setup if g:lsp_diagnostics_enabled | call lsp#register_server({
-                    \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd','--clang-tidy', '--suggest-missing-includes']},
-                    \ 'whitelist': ['c', 'cpp', 'cc', 'objc', 'objcpp'],
-                    \ })
-                    \ | endif
-        autocmd FileType c setlocal omnifunc=lsp#complete
-        autocmd FileType cpp setlocal omnifunc=lsp#complete
-        autocmd FileType cc setlocal omnifunc=lsp#complete
-        autocmd FileType objc setlocal omnifunc=lsp#complete
-        autocmd FileType objcpp setlocal omnifunc=lsp#complete
-
-        autocmd FileType cpp nnoremap gd :LspDefinition<CR>
-    augroup end
-    command! ToggleLsp  let g:lsp_diagnostics_enabled = !g:lsp_diagnostics_enabled
-endif
-
-if executable('sourcekit-lsp')
-    augroup lsp_swift
-        autocmd!
-        let g:lsp_diagnostics_enabled = 1 " default must be 'enabled' for the toggle to work
-        autocmd User lsp_setup if g:lsp_diagnostics_enabled | call lsp#register_server({
-                    \ 'name': 'sourcekit-lsp',
-                    \ 'cmd': {server_info->['sourcekit-lsp']},
-                    \ 'whitelist': ['swift'],
-                    \ }) | endif
-        autocmd FileType swift setlocal omnifunc=lsp#complete
-        autocmd FileType swift nnoremap gd :LspDefinition<CR>
-    augroup end
-    command! ToggleLsp  let g:lsp_diagnostics_enabled = !g:lsp_diagnostics_enabled
-endif
 
 " use ripgrep (rg) as default grep program
 if executable('rg')
