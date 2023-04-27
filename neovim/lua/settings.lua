@@ -1,12 +1,12 @@
 require("nvim-treesitter.configs").setup {
     -- A list of parser names, or "all"
-    ensure_installed = { "c", "lua", "rust", "cpp", "swift"},
+    ensure_installed = { "typescript", "c", "lua", "rust", "cpp", "swift", "go", "c_sharp" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
 
     -- List of parsers to ignore installing (for "all")
-    ignore_install = { "javascript" },
+    ignore_install = {  },
 
     highlight = {
         -- `false` will disable the whole extension
@@ -22,9 +22,14 @@ require("nvim-treesitter.configs").setup {
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = { "c", "cpp", "rust", "swift"}
+        additional_vim_regex_highlighting = { "typescript", "c", "cpp", "rust", "swift"}
     },
 }
+
+function find_under_cursor()
+    local word_under_cursor = vim.fn.expand("<cword>")
+    vim.cmd("Rg "..word_under_cursor)
+end
 
 function lsp_key_bindings(client, bufnr)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0}) -- 'gd' go to definition
@@ -41,6 +46,15 @@ lspconfig.clangd.setup {
 }
 
 lspconfig.sourcekit.setup {
+    on_attach = lsp_key_bindings
+}
+
+lspconfig.gopls.setup {
+    on_attach = lsp_key_bindings
+}
+
+lspconfig.csharp_ls.setup {
+    cmd = { "/Users/marcomagdy/.dotnet/tools/csharp-ls" },
     on_attach = lsp_key_bindings
 }
 
@@ -76,3 +90,16 @@ local diagnostic_config = {
     }
 
 vim.diagnostic.config(diagnostic_config)
+vim.keymap.set("n", "<leader>f", find_under_cursor)
+
+-- Disable tabs as spaces for go files
+vim.api.nvim_create_autocmd({"BufEnter", "BufLeave"}, {
+  pattern = {"*.go"},
+  callback = function(args)
+      if args.event == "BufEnter" then
+          vim.cmd("set noexpandtab") -- disable tabs as spaces in go files
+      elseif  args.event == "BufLeave" then
+          vim.cmd("set expandtab") -- enable tabs again
+      end
+  end
+})
