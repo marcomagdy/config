@@ -2,7 +2,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
-
 let mapleader="," " leader is a comma
 
 " relood the current vimrc file
@@ -26,6 +25,7 @@ nnoremap <leader>lo :lopen<CR>
 nnoremap <leader>lc :lclose<CR>
 nnoremap <leader>+ :call CopyBufferFullPath()<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
+
 " sane Y
 nnoremap Y y$
 inoremap jj <ESC>
@@ -48,8 +48,11 @@ nnoremap <Leader>fd :call CloseBufferAndDisplayNext(1)<CR>
 nnoremap <Leader>v :call VsplitBuffer()<CR>
 nnoremap <Leader>s :call HsplitBuffer()<CR>
 nmap  -  <Plug>(choosewin)
+
+tnoremap jj <C-\><C-n>
 " turn terminal window into a normal window
-tnoremap <C-n> <C-\><C-n>
+" tnoremap <C-n> <C-\><C-n>
+
 inoremap <C-l> <Plug>(copilot-next)
 inoremap <C-h> <Plug>(copilot-previous)
 " nnoremap <Leader>b :bp<CR>
@@ -147,8 +150,10 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'wellle/targets.vim'
 Plug 't9md/vim-choosewin'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'github/copilot.vim'
+Plug 'keith/swift.vim'
 Plug 'mbbill/undotree'
+Plug 'github/copilot.vim'
+Plug 'akinsho/toggleterm.nvim'
 
 call plug#end()
 filetype plugin indent on "required
@@ -177,6 +182,10 @@ let g:highlightedyank_highlight_duration = 750
 let g:quickrun_config = {}
 let g:quickrun_config.cpp = {'cmdopt' : '-fsanitize=address -std=c++17 -Wall -Wextra'}
 
+" disable copilot if running in vscode
+if !exists('g:vscode')
+    let g:copilot#enabled = 1
+endif
 
 " use ripgrep (rg) as default grep program
 if executable('rg')

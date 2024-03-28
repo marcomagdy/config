@@ -26,6 +26,21 @@ require("nvim-treesitter.configs").setup {
     },
 }
 
+require("toggleterm").setup {
+    size = 20,
+    open_mapping = [[<c-\>]],
+    hide_numbers = true,
+    shade_filetypes = {},
+    shade_terminals = true,
+    shading_factor = -50,
+    start_in_insert = true,
+    insert_mappings = true,
+    persist_size = true,
+    direction = 'float',
+    close_on_exit = true,
+    shell = vim.o.shell,
+}
+
 function find_under_cursor()
     local word_under_cursor = vim.fn.expand("<cword>")
     vim.cmd("Rg "..word_under_cursor)
@@ -46,7 +61,8 @@ lspconfig.clangd.setup {
 }
 
 lspconfig.sourcekit.setup {
-    on_attach = lsp_key_bindings
+    on_attach = lsp_key_bindings,
+    filetypes = { "swift", "objective-c", "objective-cpp"}
 }
 
 lspconfig.gopls.setup {
