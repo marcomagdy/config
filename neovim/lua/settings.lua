@@ -27,16 +27,12 @@ require("nvim-treesitter.configs").setup {
 }
 
 require("toggleterm").setup {
-    size = 20,
     open_mapping = [[<c-\>]],
-    hide_numbers = true,
-    shade_filetypes = {},
-    shade_terminals = true,
-    shading_factor = -50,
-    start_in_insert = true,
     insert_mappings = true,
-    persist_size = true,
+    start_in_insert = true,
+    hide_numbers = true,
     direction = 'float',
+    shade_terminals = false,
     close_on_exit = true,
     shell = vim.o.shell,
 }
@@ -108,6 +104,21 @@ local diagnostic_config = {
 vim.diagnostic.config(diagnostic_config)
 vim.keymap.set("n", "<leader>f", find_under_cursor)
 
+-- Use ripgrep as default grep program
+-- vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
+
+-- if file build/build.ninja exists, use ninja to build
+local function set_make_program()
+    if vim.fn.filereadable("build/build.ninja") == 1 then
+        vim.o.makeprg = "ninja -C build"
+    elseif vim.fn.filereadable("Makefile") == 1 then
+        vim.o.makeprg = "make"
+    else
+        vim.o.makeprg = ""
+    end
+end
+
+
 -- Disable tabs as spaces for go files
 vim.api.nvim_create_autocmd({"BufEnter", "BufLeave"}, {
   pattern = {"*.go"},
@@ -117,5 +128,22 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufLeave"}, {
       elseif  args.event == "BufLeave" then
           vim.cmd("set expandtab") -- enable tabs again
       end
+  end
+})
+
+-- Function to source project-specific .nvimrc.lua if present
+local function load_local_config()
+  local local_config = vim.fn.getcwd() .. '/.nvimrc.lua'
+  if vim.fn.filereadable(local_config) == 1 then
+    dofile(local_config)
+  end
+end
+
+-- Use an autocommand to check for and load local configuration on directory change
+vim.api.nvim_create_autocmd("VimEnter", {
+  pattern = "*",
+  callback = function()
+    load_local_config()
+    set_make_program()
   end
 })

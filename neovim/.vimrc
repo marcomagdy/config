@@ -49,9 +49,8 @@ nnoremap <Leader>v :call VsplitBuffer()<CR>
 nnoremap <Leader>s :call HsplitBuffer()<CR>
 nmap  -  <Plug>(choosewin)
 
-tnoremap jj <C-\><C-n>
 " turn terminal window into a normal window
-" tnoremap <C-n> <C-\><C-n>
+tnoremap jj <C-\><C-n>
 
 inoremap <C-l> <Plug>(copilot-next)
 inoremap <C-h> <Plug>(copilot-previous)
@@ -182,15 +181,13 @@ let g:highlightedyank_highlight_duration = 750
 let g:quickrun_config = {}
 let g:quickrun_config.cpp = {'cmdopt' : '-fsanitize=address -std=c++17 -Wall -Wextra'}
 
-" disable copilot if running in vscode
-if !exists('g:vscode')
-    let g:copilot#enabled = 1
-endif
+" disable copilot by default
+let g:copilot_enabled = 0
 
 " use ripgrep (rg) as default grep program
-if executable('rg')
-    set grepprg=rg\ -S\ --vimgrep
-endif
+" if executable('rg')
+"     set grepprg=rg\ -S\ --vimgrep
+" endif
 
 " use ninja instead of make. Switch to build dir first
 if executable('ninja')

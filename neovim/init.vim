@@ -4,5 +4,6 @@ source ~/.vimrc
 
 lua << EOF
 require("settings")
+require("Copilot")
 EOF
 
