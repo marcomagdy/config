@@ -42,6 +42,7 @@ function find_under_cursor()
     vim.cmd("Rg "..word_under_cursor)
 end
 
+vim.cmd[[set completeopt+=menuone,noselect,popup]]
 function lsp_key_bindings(client, bufnr)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0}) -- 'gd' go to definition
         vim.keymap.set("n", "gi", vim.lsp.buf.hover, {buffer=bufnr}) -- 'gi' go to info
@@ -49,26 +50,23 @@ function lsp_key_bindings(client, bufnr)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {buffer=0}) -- 'ca' code-action
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {buffer=0})
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {buffer=0})
+        vim.lsp.completion.enable(true, client.id, bufnr, {
+            autotrigger = true,
+            convert = function(item)
+                return { abbr = item.label:gsub('%b()', '') }
+            end,
+        })
 end
 
-local lspconfig = require('lspconfig')
-lspconfig.clangd.setup {
-    on_attach = lsp_key_bindings
-}
 
-lspconfig.sourcekit.setup {
+vim.lsp.config('clangd', { on_attach = lsp_key_bindings })
+vim.lsp.config('sourcekit', {
     on_attach = lsp_key_bindings,
     filetypes = { "swift", "objective-c", "objective-cpp"}
-}
+})
 
-lspconfig.gopls.setup {
-    on_attach = lsp_key_bindings
-}
-
-lspconfig.csharp_ls.setup {
-    cmd = { "/Users/marcomagdy/.dotnet/tools/csharp-ls" },
-    on_attach = lsp_key_bindings
-}
+vim.lsp.enable('clangd')
+vim.lsp.enable('sourcekit')
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover, {
@@ -103,7 +101,7 @@ local diagnostic_config = {
 
 vim.diagnostic.config(diagnostic_config)
 vim.keymap.set("n", "<leader>f", find_under_cursor)
-
+vim.keymap.set('i', '<c-space>', function() vim.lsp.completion.get() end)
 -- Use ripgrep as default grep program
 -- vim.o.grepprg = "rg --vimgrep --no-heading --smart-case"
 
