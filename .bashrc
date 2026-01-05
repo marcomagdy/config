@@ -35,31 +35,31 @@ export PROMPT_DIRTRIM=4
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 
-
-PS1='\[\033[0;32m\]\u@Rome \[\033[33m\]\w\[\033[0m\]'
-PS1=$PS1"\n$ "
-
-# brew install bash-git-prompt
-if [ -f "/opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-    GIT_PROMPT_SHOW_UPSTREAM=0
-    GIT_PROMPT_ONLY_IN_REPO=1
-    GIT_PROMPT_START="_LAST_COMMAND_INDICATOR_ \[\033[0;32m\]\u@Rome \[\033[33m\]\w\[\033[0m\]"
-    GIT_PROMPT_END="\n$ "
-    source /opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh
-fi
-
 if [[ "$(uname)" == "Darwin" ]]; then
 
-    alias ls='ls -ahl'
+    alias ls='exa -ahl'
 fi
 
-[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
-# from https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-[ -f ~/git-completion.bash ] && source ~/git-completion.bash
-# brew install fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# brew install z
-[ -f /opt/homebrew/etc/profile.d/z.sh ] && source /opt/homebrew/etc/profile.d/z.sh
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
-trap "~/history-dedup $HISTFILE" EXIT
+# brew install bash-completion@2
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+# brew install fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# brew install starship
+eval "$(starship init bash)"
+[ -f ~/g.sh ] && source ~/g.sh
+
+
+function cleanup() {
+    echo "Saving history and deduplicating entries"
+    ~/bin/bash-history-cleaner $HISTFILE
+}
+
+trap cleanup EXIT
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
+
