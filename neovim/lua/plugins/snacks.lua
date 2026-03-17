@@ -5,6 +5,7 @@ return {
       indent = {
         enabled = false,
       },
+      dashboard = { enabled = false },
     },
   },
 }
