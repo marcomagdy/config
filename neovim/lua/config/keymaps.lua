@@ -13,7 +13,7 @@ vim.keymap.set("n", "<leader>h", "<cmd>noh<CR>", { silent = true, desc = "Hide h
 vim.keymap.set({ "n", "v", "o" }, "0", "$", { noremap = true })
 
 --
-function copilot_toggle()
+local function copilot_toggle()
   if vim.g.copilot_enabled == 1 then
     vim.g.copilot_enabled = 0
   else
@@ -22,4 +22,4 @@ function copilot_toggle()
   vim.cmd("Copilot status")
 end
 
-vim.api.nvim_set_keymap("n", "<leader>!", ":lua copilot_toggle()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>!", copilot_toggle, { noremap = true, silent = true })
