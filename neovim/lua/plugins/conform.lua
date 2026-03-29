@@ -8,17 +8,7 @@ return {
     },
     formatters = {
       clang_format = {
-        args = function()
-          local raw_format = [[
-          BasedOnStyle: WebKit,
-          BreakBeforeBraces: Stroustrup,
-          ColumnLimit: 120
-        ]]
-          -- Build args based on Vim settings
-          local args = { "--style={" .. raw_format .. "}" }
-
-          return args
-        end,
+        append_args = { "--fallback-style=WebKit" },
       },
     },
   },

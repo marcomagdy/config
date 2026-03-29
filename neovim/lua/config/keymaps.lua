@@ -22,4 +22,11 @@ local function copilot_toggle()
   vim.cmd("Copilot status")
 end
 
-vim.keymap.set("n", "<leader>!", copilot_toggle, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>!", copilot_toggle, { noremap = true, silent = true, desc = "Toggle Copilot" })
+
+-- yank the current file's path to the system clipboard
+vim.keymap.set("n", "<leader>fy", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied " .. path)
+end, { desc = "Copy file's absolute path" })
