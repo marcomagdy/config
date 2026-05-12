@@ -6,6 +6,7 @@ vim.g.lazyvim_picker = "fzf"
 
 vim.opt.textwidth = 120
 vim.opt.colorcolumn = "120"
+vim.opt.wrap = true
 
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.shiftwidth = 4 -- Number of spaces for each indent level

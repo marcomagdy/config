@@ -10,6 +10,9 @@ vim.keymap.set("i", "jj", "<ESC>", { silent = true })
 vim.keymap.set({ "o", "x" }, "al", select_line, { desc = "around line" })
 vim.keymap.set("n", "<leader>h", "<cmd>noh<CR>", { silent = true, desc = "Hide highlight" })
 
+vim.keymap.set("t", "jj", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set({ "t", "n" }, "<C-\\>", "<C-\\><C-n>:ToggleTerm direction=float<CR>", { desc = "Toggle terminal" })
+
 vim.keymap.set({ "n", "v", "o" }, "0", "$", { noremap = true })
 
 --
