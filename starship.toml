@@ -1,5 +1,4 @@
 # Get editor completions based on the config schema
-lkajsdflkjaf
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # Inserts a blank line between shell prompts
